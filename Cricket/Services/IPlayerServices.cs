@@ -6,5 +6,6 @@ namespace Cricket.Services
     {
         public object PlayerGet(Guid Id, string FirstName, string LastName, int age, string playerType, string Team);
         public object PlayerPost(AddPlayer player);
+        public object PlayerDelete(Guid Id);
     }
 }

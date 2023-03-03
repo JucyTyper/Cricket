@@ -33,6 +33,13 @@ namespace Cricket.Controllers
             var response = playerServices.PlayerPost(player);
             return Ok(response);
         }
+        [HttpDelete]
+        [Route("Player")]
+        public IActionResult DeletePlayer(Guid Id)
+        {
+            var response = playerServices.PlayerDelete(Id);
+            return Ok(response);
+        }
 
     }
 }

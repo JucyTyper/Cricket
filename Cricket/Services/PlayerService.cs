@@ -44,7 +44,7 @@ namespace Cricket.Services
         {
 
             var _player = from x in _db.players
-                where (x.FirstName == FirstName || FirstName == null) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == null)
+                where (x.FirstName == FirstName || FirstName == null) && (x.LastName == LastName || LastName == null) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == null)
                 select new { x.Id, x.Age, x.FirstName, x.LastName, x.PlayerType, x.Team, x.JerseyNo,x.Runs,x.Wickets, x.CreationDateTime };
             _player.AsQueryable();
             try 
@@ -64,6 +64,32 @@ namespace Cricket.Services
             }
             response.Data = _player;
             return response;
+        }
+        public object PlayerDelete(Guid Id)
+        {
+            try
+            {
+                var player = from x in _db.players
+                             where x.Id == Id
+                             select x;
+                player.AsQueryable();
+                if (player.Count() == 0)
+                {
+                    response.StatusCode = 404;
+                    response.Message = "Player Not Found";
+                    return response;
+                }
+                player.First().IsDeleted = true;
+                response.StatusCode = 200;
+                response.Message = "Player Deleted";
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response.StatusCode = 500;
+                response.Message = ex.Message;
+                return response;
+            }
         }
     }
 }

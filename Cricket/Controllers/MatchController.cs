@@ -25,7 +25,12 @@ namespace Cricket.Controllers
             var response = MatchService.CreateMatch(match);
             return Ok(response);
         }
-        //[HttpGet]
-
+        [HttpGet]
+        [Route("Match")]
+        public IActionResult GetMatch(Guid id,string? date,string? TeamA,string? TeamB)
+        {
+            var response = MatchService.GetMatch(id,date,TeamA,TeamB);
+            return Ok(response);
+        }
     }
 }
