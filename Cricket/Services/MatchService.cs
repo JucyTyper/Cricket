@@ -14,7 +14,7 @@ namespace Cricket.Services
         {
             this._db = _db;
         }
-        public object CreateMatch(AddMatch _match)
+        /*public object CreateMatch(Match _match)
         {
             var match = new Match();
             try
@@ -134,6 +134,6 @@ namespace Cricket.Services
                 response.StatusCode = 500;
                 return response;
             }
-        }
+        }*/
     }
 }

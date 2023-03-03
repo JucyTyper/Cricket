@@ -12,7 +12,7 @@ namespace Cricket.Data
         }
         public DbSet<Player> players { get; set; }
         public DbSet<Match> matches { get; set; }
-        public DbSet<Team> teams { get; set; }
-        public DbSet<PlayerMapModel> playerMapModels { get; set; }
+        public DbSet<TeamModel> teams { get; set; }
+        public DbSet<PlayerTeamMap> TeamPlayerMap { get; set; }
     }
 }

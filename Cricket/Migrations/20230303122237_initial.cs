@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cricket.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,27 +16,14 @@ namespace Cricket.Migrations
                 columns: table => new
                 {
                     MatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamA = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamB = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TeamA = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TeamB = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NoOfOvers = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_matches", x => x.MatchId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "playerMapModels",
-                columns: table => new
-                {
-                    MapId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_playerMapModels", x => x.MapId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,6 +40,7 @@ namespace Cricket.Migrations
                     JerseyNo = table.Column<int>(type: "int", nullable: false),
                     PlayerType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Team = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -62,12 +50,26 @@ namespace Cricket.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamPlayerMap",
+                columns: table => new
+                {
+                    TeamMapId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PlayerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TeamID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamPlayerMap", x => x.TeamMapId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "teams",
                 columns: table => new
                 {
                     TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TeamName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MatchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,10 +84,10 @@ namespace Cricket.Migrations
                 name: "matches");
 
             migrationBuilder.DropTable(
-                name: "playerMapModels");
+                name: "players");
 
             migrationBuilder.DropTable(
-                name: "players");
+                name: "TeamPlayerMap");
 
             migrationBuilder.DropTable(
                 name: "teams");
