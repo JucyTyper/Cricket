@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cricket.Migrations
 {
     [DbContext(typeof(CricketDatabase))]
-    [Migration("20230303062135_new")]
-    partial class @new
+    [Migration("20230303122237_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,17 +31,17 @@ namespace Cricket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("TeamA")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NoOfOvers")
+                        .HasColumnType("int");
 
-                    b.Property<string>("TeamB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("TeamA")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TeamB")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("MatchId");
 
@@ -63,6 +63,9 @@ namespace Cricket.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -96,34 +99,34 @@ namespace Cricket.Migrations
                     b.ToTable("players");
                 });
 
-            modelBuilder.Entity("Cricket.Models.PlayerMapModel", b =>
+            modelBuilder.Entity("Cricket.Models.PlayerTeamMap", b =>
                 {
-                    b.Property<Guid>("MapId")
+                    b.Property<Guid>("TeamMapId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MatchId")
+                    b.Property<Guid>("PlayerID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PlayerId")
+                    b.Property<Guid>("TeamID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TeamId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("TeamMapId");
 
-                    b.HasKey("MapId");
-
-                    b.ToTable("playerMapModels");
+                    b.ToTable("TeamPlayerMap");
                 });
 
-            modelBuilder.Entity("Cricket.Models.Team", b =>
+            modelBuilder.Entity("Cricket.Models.TeamModel", b =>
                 {
                     b.Property<Guid>("TeamId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("MatchID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TeamName")
                         .IsRequired()

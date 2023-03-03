@@ -40,11 +40,11 @@ namespace Cricket.Services
             response.Data = _player;
             return response;
         }
-        public object PlayerGet(Guid Id, string FirstName, string LastName, int age, string playerType, string Team)
+        public object PlayerGet(Guid Id, string FirstName, string LastName, int age, string playerType, string Team,bool status)
         {
 
             var _player = from x in _db.players
-                where (x.FirstName == FirstName || FirstName == null) && (x.LastName == LastName || LastName == null) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == null)
+                where (x.FirstName == FirstName || FirstName == null) && (x.LastName == LastName || LastName == null)&& (x.IsAvailable == status||status == false) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == null)
                 select new { x.Id, x.Age, x.FirstName, x.LastName, x.PlayerType, x.Team, x.JerseyNo,x.Runs,x.Wickets, x.CreationDateTime };
             _player.AsQueryable();
             try 
