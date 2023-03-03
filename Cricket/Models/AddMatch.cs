@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace Cricket.Models
+﻿namespace Cricket.Models
 {
-    public class Match
+    public class AddMatch
     {
-        public Guid MatchId { get; set; } = Guid.NewGuid();
         public string Date { get; set; }
         public string TeamA { get; set; }
         public string TeamB { get; set; }
         //public int NoOfOvers { get; set; }
-
+        public List<string> TeamAPlayers { get; set;}
+        public List<string> TeamBPlayers { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cricket.Data;
+using Cricket.Models;
 using Cricket.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,14 @@ namespace Cricket.Controllers
             this.MatchService = MatchService;
             this._db = db;
         }
-        public IActionResult Index()
+        [HttpPost]
+        [Route("Match")]
+        public IActionResult PostMatch(AddMatch match)
         {
-            var model = MatchService.selectPlayer();
-            return Ok(model);
+            var response = MatchService.CreateMatch(match);
+            return Ok(response);
         }
+        //[HttpGet]
+
     }
 }

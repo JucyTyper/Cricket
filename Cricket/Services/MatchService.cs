@@ -1,6 +1,5 @@
 ﻿using Cricket.Data;
 using Cricket.Models;
-using Cricket.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cricket.Services
@@ -14,26 +13,51 @@ namespace Cricket.Services
         {
             this._db = _db;
         }
-        public List<Player> GetPlayerList()
+        public object CreateMatch(AddMatch _match)
         {
-            var playerList = _db.players.Select(x =>x).ToList();
-            return playerList;
-        }
-        public object selectPlayer()
-        {
-            var AllPlayers = GetPlayerList();
-            var model = new PlayerView();
-            model.PlayerSelectList = new List<SelectListItem>();
-            foreach (var player in AllPlayers)
+            var match = new Match();
+            try
             {
-                model.PlayerSelectList.Add(new SelectListItem
+                match.Date = _match.Date;
+                match.TeamA = _match.TeamA;
+                match.TeamB = _match.TeamB;
+                var teamA = new Team
                 {
-                    Text = player.Name,
-                    Value = player.Id.ToString(),
-                });
+                    TeamId = Guid.NewGuid(),
+                    TeamName = _match.TeamA,
+                    MatchID = match.MatchId
+                };
+                _db.teams.Add(teamA);
+                var teamB = new Team
+                {
+                    TeamId = Guid.NewGuid(),
+                    TeamName = _match.TeamA,
+                    MatchID = match.MatchId
+                };
+                _db.teams.Add(teamB);
+                _db.matches.Add(match);
+                foreach(string s in _match.TeamAPlayers)
+                {
+                    var PlayerMap = new PlayerMapModel
+                    {
+                        PlayerId = new Guid(s),
+                        MatchId= match.MatchId,
+                        TeamId= teamA.MatchID,
+                    };
+                    _db.playerMapModels.Add(PlayerMap);
+                }
+                _db.SaveChanges();
             }
-            return model;
-            
+            catch (Exception ex) 
+            {
+                response.Message = ex.Message;
+                response.StatusCode= 500;
+                return response;
+            }
+            response.StatusCode = 200;
+            response.Message = "Match created";
+            response.Data = match;
+            return response;
         }
 
     }

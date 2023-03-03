@@ -1,7 +1,9 @@
-﻿namespace Cricket.Services
+﻿using Cricket.Models;
+
+namespace Cricket.Services
 {
     public interface IMatchService 
     {
-        public object selectPlayer();
+        public object CreateMatch(AddMatch _match);
     }
 }

@@ -21,9 +21,9 @@ namespace Cricket.Controllers
 
         [HttpGet]
         [Route("Player")]
-        public IActionResult Get(Guid Id, string? Name, int age,string? playerType,string? Team, int Matches )
+        public IActionResult Get(Guid Id, string? FirstName, string? LastName, int age,string? playerType,string? Team )
         {
-            var response = playerServices.PlayerGet(Id, Name, age, playerType, Team, Matches);
+            var response = playerServices.PlayerGet(Id, FirstName,LastName, age, playerType, Team);
             return Ok(response);
         }
         [HttpPost]
@@ -33,5 +33,6 @@ namespace Cricket.Controllers
             var response = playerServices.PlayerPost(player);
             return Ok(response);
         }
+
     }
 }
