@@ -1,0 +1,37 @@
+[33mcommit b57b19ca608c7db332628b6d5b30e9131a34c3b9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mCricketApp[m[33m)[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Fri Mar 3 19:07:50 2023 +0530
+
+    Revert "try"
+    
+    This reverts commit 63394141b17f13e6859ed594aa54a3d6aa98110b.
+
+[33mcommit 63394141b17f13e6859ed594aa54a3d6aa98110b[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Fri Mar 3 19:06:21 2023 +0530
+
+    try
+
+[33mcommit 6e4dadcb237aa344a4bfa9464886d07cd1c97b7e[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Fri Mar 3 15:46:25 2023 +0530
+
+    initial
+
+[33mcommit 1165ec91a1556d02a1202994e1f06a3668ecd63d[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Fri Mar 3 12:11:17 2023 +0530
+
+    updated
+
+[33mcommit 0ac461e9d52acbeba9ccf8446c4cc343c9e80cd1[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Thu Mar 2 18:44:33 2023 +0530
+
+    Add project files.
+
+[33mcommit 0c2a68fadfc8fcfa3c2f1fd07d216a7c3f526c6e[m
+Author: ajay-chicmic <ajay.joshi@chicmic.co.in>
+Date:   Thu Mar 2 18:44:31 2023 +0530
+
+    Add .gitattributes and .gitignore.
