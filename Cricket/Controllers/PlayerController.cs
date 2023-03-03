@@ -21,9 +21,9 @@ namespace Cricket.Controllers
 
         [HttpGet]
         [Route("Player")]
-        public IActionResult Get(Guid Id, string? FirstName, string? LastName, int age,string? playerType,string? Team, bool status )
+        public IActionResult Get(Guid Id, string? FirstName, string? LastName, int age,string? playerType,string? Team )
         {
-            var response = playerServices.PlayerGet(Id, FirstName,LastName, age, playerType, Team,status);
+            var response = playerServices.PlayerGet(Id, FirstName,LastName, age, playerType, Team);
             return Ok(response);
         }
         [HttpPost]

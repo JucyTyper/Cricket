@@ -28,17 +28,17 @@ namespace Cricket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoOfOvers")
-                        .HasColumnType("int");
+                    b.Property<string>("TeamA")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TeamA")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TeamB")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TeamB")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MatchId");
 
@@ -60,9 +60,6 @@ namespace Cricket.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -96,34 +93,34 @@ namespace Cricket.Migrations
                     b.ToTable("players");
                 });
 
-            modelBuilder.Entity("Cricket.Models.PlayerTeamMap", b =>
+            modelBuilder.Entity("Cricket.Models.PlayerMapModel", b =>
                 {
-                    b.Property<Guid>("TeamMapId")
+                    b.Property<Guid>("MapId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PlayerID")
+                    b.Property<Guid>("MatchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TeamID")
+                    b.Property<Guid>("PlayerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("TeamMapId");
+                    b.Property<Guid>("TeamId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("TeamPlayerMap");
+                    b.HasKey("MapId");
+
+                    b.ToTable("playerMapModels");
                 });
 
-            modelBuilder.Entity("Cricket.Models.TeamModel", b =>
+            modelBuilder.Entity("Cricket.Models.Team", b =>
                 {
                     b.Property<Guid>("TeamId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<Guid>("MatchID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TeamName")
                         .IsRequired()

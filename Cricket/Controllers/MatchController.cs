@@ -13,14 +13,14 @@ namespace Cricket.Controllers
         private readonly IMatchService MatchService;
         private readonly CricketDatabase _db;
 
-        /*public MatchController(IMatchService MatchService, CricketDatabase db)
+        public MatchController(IMatchService MatchService, CricketDatabase db)
         {
             this.MatchService = MatchService;
             this._db = db;
         }
         [HttpPost]
         [Route("Match")]
-        public IActionResult PostMatch(Match match)
+        public IActionResult PostMatch(AddMatch match)
         {
             var response = MatchService.CreateMatch(match);
             return Ok(response);
@@ -31,6 +31,6 @@ namespace Cricket.Controllers
         {
             var response = MatchService.GetMatch(id,date,TeamA,TeamB);
             return Ok(response);
-        }*/
+        }
     }
 }

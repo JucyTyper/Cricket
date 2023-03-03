@@ -13,7 +13,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CricketDatabase>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CricketDatabaseConnectionString")));
 builder.Services.AddScoped<IPlayerServices, PlayerService>();
 builder.Services.AddScoped<IMatchService, MatchService>();
-builder.Services.AddScoped<ITeamServices, TeamServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

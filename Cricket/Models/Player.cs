@@ -12,7 +12,6 @@
         public int JerseyNo { get; set; } = 0;
         public string PlayerType { get; set; } = string.Empty;
         public string Team { get; set; } = string.Empty;
-        public bool IsAvailable { get; set; } = true;
         public bool IsDeleted { get; set; } = false;
         public DateTime CreationDateTime { get; set; } = DateTime.Now;
     }
