@@ -33,8 +33,6 @@ namespace Cricket.Services
                 });
             }
             return model;
-            
         }
-
     }
 }
