@@ -18,11 +18,15 @@ namespace Cricket.Services
             var _player = new Player();
             try
             {
-                _player.Name = player.Name;
-                    _player.Age = player.Age;
-                    _player.Team = player.Team;
-                    _player.Matches = player.Matches;
-                    _player.PlayerType = player.PlayerType;
+                _player.FirstName = player.FirstName;
+                _player.LastName = player.LastName;
+                _player.Age = player.Age;
+                _player.Team = player.Team;
+                _player.NoOfMatches = player.NoOfMatches;
+                _player.PlayerType = player.PlayerType;
+                _player.JerseyNo = player.JerseyNo;
+                _player.Wickets= player.Wickets;
+                _player.Runs= player.Runs;
                 _db.players.Add(_player);
                 _db.SaveChanges();
             }
@@ -36,12 +40,12 @@ namespace Cricket.Services
             response.Data = _player;
             return response;
         }
-        public object PlayerGet(Guid Id, string Name, int age, string playerType, string Team, int Matches)
+        public object PlayerGet(Guid Id, string FirstName, string LastName, int age, string playerType, Guid Team,bool status)
         {
 
             var _player = from x in _db.players
-                where (x.Name == Name || Name == null) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == null) && (x.Matches == Matches || Matches == null)
-                select new { x.Id, x.Age, x.Name, x.PlayerType, x.Team, x.Matches, x.CreationDateTime };
+                where (x.FirstName == FirstName || FirstName == null) && (x.LastName == LastName || LastName == null)&& (x.IsAvailable == status||status == false) && (x.Id == Id || Id == Guid.Empty) && (x.Age == age || age == 0) && (x.IsDeleted == false) && (x.PlayerType == playerType || playerType == null) && (x.Team == Team || Team == Guid.Empty)
+                select new { x.Id, x.Age, x.FirstName, x.LastName, x.PlayerType, x.Team, x.JerseyNo,x.Runs,x.Wickets, x.CreationDateTime };
             _player.AsQueryable();
             try 
             { 
@@ -60,6 +64,32 @@ namespace Cricket.Services
             }
             response.Data = _player;
             return response;
+        }
+        public object PlayerDelete(Guid Id)
+        {
+            try
+            {
+                var player = from x in _db.players
+                             where x.Id == Id
+                             select x;
+                player.AsQueryable();
+                if (player.Count() == 0)
+                {
+                    response.StatusCode = 404;
+                    response.Message = "Player Not Found";
+                    return response;
+                }
+                player.First().IsDeleted = true;
+                response.StatusCode = 200;
+                response.Message = "Player Deleted";
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response.StatusCode = 500;
+                response.Message = ex.Message;
+                return response;
+            }
         }
     }
 }

@@ -10,6 +10,10 @@ namespace Cricket.Data
         public CricketDatabase(DbContextOptions options) : base(options)
         {
         }
-            public DbSet<Player> players { get; set; }
+        public DbSet<Player> players { get; set; }
+        public DbSet<Match> matches { get; set; }
+        public DbSet<TeamModel> teams { get; set; }
+        public DbSet<PlayerTeamMap> TeamPlayerMap { get; set; }
+        public DbSet<Ball> balls { get; set; }
     }
 }

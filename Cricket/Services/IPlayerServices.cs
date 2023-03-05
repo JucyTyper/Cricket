@@ -4,7 +4,8 @@ namespace Cricket.Services
 {
     public interface IPlayerServices
     {
-        public object PlayerGet(Guid Id, string Name, int age, string playerType, string Team,int Matches);
+        public object PlayerGet(Guid Id, string FirstName, string LastName, int age, string playerType, Guid Team,bool status);
         public object PlayerPost(AddPlayer player);
+        public object PlayerDelete(Guid Id);
     }
 }
