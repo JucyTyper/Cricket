@@ -20,21 +20,18 @@ namespace Cricket.Controllers
         }
 
         [HttpGet]
-        [Route("Player")]
         public IActionResult Get(Guid Id, string? FirstName, string? LastName, int age,string? playerType,Guid TeamId, bool status )
         {
             var response = playerServices.PlayerGet(Id, FirstName,LastName, age, playerType, TeamId,status);
             return Ok(response);
         }
         [HttpPost]
-        [Route("Player")]
         public IActionResult Post(AddPlayer player)
         {
             var response = playerServices.PlayerPost(player);
             return Ok(response);
         }
         [HttpDelete]
-        [Route("Player")]
         public IActionResult DeletePlayer(Guid Id)
         {
             var response = playerServices.PlayerDelete(Id);

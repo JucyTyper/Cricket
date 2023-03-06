@@ -17,14 +17,13 @@ namespace Cricket.Controllers
 
         }
         [HttpPost]
-        [Route("Team")]
+
         public IActionResult CreateTeam(AddTeam team)
         {
             var response = teamServices.CreateTeam(team);
             return Ok(response);
         }
         [HttpGet]
-        [Route("Team")]
         public IActionResult GetTeam(Guid id,string? name)
         {
             var response = teamServices.GetTeam(id,name);
@@ -37,5 +36,13 @@ namespace Cricket.Controllers
             var response = teamServices.GetTeamplayers(TeamId);
             return Ok(response);
         }
+        [HttpPost]
+        [Route("TeamPlayer")]
+        public IActionResult AddTeamPlayer(AddTeamPlayer TeamPlayer)
+        {
+            var response = teamServices.AddTeamplayer(TeamPlayer);
+            return Ok(response);
+        }
+
     }
 }

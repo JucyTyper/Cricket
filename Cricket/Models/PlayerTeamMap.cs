@@ -8,5 +8,6 @@ namespace Cricket.Models
         public Guid TeamMapId { get; set; } = Guid.NewGuid();
         public Guid PlayerID { get; set; }
         public Guid TeamID { get; set; }
+        public bool IsRemoved { get; set; } = false;
     }
 }

@@ -19,14 +19,12 @@ namespace Cricket.Controllers
             this._db = db;
         }
         [HttpPost]
-        [Route("Match")]
         public IActionResult PostMatch(AddBall ball)
         {
             var response = ballService.AddBall(ball);
             return Ok(response);
         }
         [HttpGet]
-        [Route("Match")]
         public IActionResult GetBalll(Guid id, int BallNo, Guid Bowler, int over, Guid StrikeBatsman, string? status, Guid matchId, Guid BattingTeamId, Guid FieldingTeamId)
         {
             var response = ballService.GetBall(id, BallNo,Bowler,over,StrikeBatsman,status,matchId,BattingTeamId,FieldingTeamId);

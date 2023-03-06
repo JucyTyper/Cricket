@@ -7,5 +7,6 @@ namespace Cricket.Services
         public object CreateTeam(AddTeam team);
         public object GetTeam(Guid id, string name);
         public object GetTeamplayers(Guid id);
+        public object AddTeamplayer(AddTeamPlayer TeamPlayer);
     }
 }
